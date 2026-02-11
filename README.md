@@ -22,7 +22,7 @@ dustlib/
 │   └── 01-overview.md # overview of dustlib’s design and semantics
 └── sector/
     └── dustlib/
-        ├── Sector.toml        # crate manifest used by the build system
+        ├── Sector.toml        # sector manifest used by the build system
         └── src/
             ├── lib.ds      # top‑level forge re‑exporting modules
             ├── collections.ds
@@ -43,9 +43,9 @@ features being developed in tandem with the K‑regime expansion.
 ## Manifest (Dust.toml)
 
 The `Dust.toml` file defines package metadata for dustlib and its
-crates.  It is similar to Rust’s `Cargo.toml` but is tailored for
-the Dust package manager (dustpkg).  It lists the core library as a
-workspace member and records dependencies, versions and features.
+sectors tailored forthe Dust package manager (dustpkg).  It lists 
+the core library as a workspace member and records dependencies, 
+versions and features.
 
 ## Specification
 
