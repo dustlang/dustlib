@@ -1,0 +1,21 @@
+/// Effects forge.
+///
+/// Provides wrappers around side‑effectful operations.  In Dust,
+/// effects are explicit; functions that perform side effects must
+/// declare them.  The processes below are simple stubs used to
+/// illustrate how effects might be encapsulated in a library.
+
+forge effects {
+    /// A no‑op effect that always succeeds.  Returns unit `()`.
+    process noop() -> () = {
+        // intentionally empty
+    };
+
+    /// An example effect that always fails by returning an `Error`.
+    use error::Error;
+
+    process fail_example() -> Error = {
+        let err: Error = error.new("example effect failure");
+        return err;
+    };
+}

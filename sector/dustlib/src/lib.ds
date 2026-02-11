@@ -1,0 +1,12 @@
+/// Top‑level forge for dustlib.
+///
+/// This file aggregates the various forges that make up the core
+/// library.  Each sub‑module lives in its own `.dust` file (e.g.
+/// `collections.dust`, `math.dust`, etc.).  Importing `dustlib`
+/// brings all of these definitions into scope.
+
+forge dustlib {
+    // Placeholder aggregator forge.  Actual exports are defined in
+    // individual files.  The Dust compiler will load all forges in
+    // this crate automatically.
+}

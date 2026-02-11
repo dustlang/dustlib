@@ -1,0 +1,28 @@
+/// Math forge.
+///
+/// The `math` forge exposes simple numeric processes.  These
+/// operations are deterministic and pure; they operate on arrays
+/// of numbers and return scalar values.  In future versions these
+/// processes may be extended to support generic numeric types.
+
+forge math {
+    use collections::Array;
+
+    /// Sum the elements of an integer array.  Returns 0 if the
+    /// array is empty.
+    process sum(arr: Array<Int>) -> Int = {
+        // TODO: iterate over arr.data and accumulate
+    };
+
+    /// Return the maximum element in an integer array.  Returns
+    /// `null` if the array is empty.
+    process max(arr: Array<Int>) -> Int? = {
+        // TODO: iterate and track maximum
+    };
+
+    /// Return the minimum element in an integer array.  Returns
+    /// `null` if the array is empty.
+    process min(arr: Array<Int>) -> Int? = {
+        // TODO: iterate and track minimum
+    };
+}

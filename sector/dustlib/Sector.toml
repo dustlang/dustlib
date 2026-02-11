@@ -1,0 +1,12 @@
+[package]
+name = "dustlib"
+version = "0.2.0"
+edition = "2026"
+license = "DOSL"
+description = "Core library crate for the Dust Programming Language (DPL)"
+
+[lib]
+path = "src/lib.dust"
+
+[dependencies]
+# dustlib has no external dependencies; all code is written in Dust.

@@ -1,0 +1,33 @@
+/// Concurrency forge.
+///
+/// This forge declares concurrency primitives for the K‑regime.  It
+/// defines a `Thread<T>` shape representing a handle to a spawned
+/// thread and processes to spawn and join threads.  In the current
+/// prototype, these are declarations without implementations; they
+/// serve as placeholders for deterministic concurrency as defined in
+/// the DPL specification【548468680421956†L121-L129】.
+
+forge concurrency {
+    /// A handle to a thread that will eventually produce a value of
+    /// type `T`.  The `handle` field is opaque and is manipulated
+    /// only via `spawn` and `join` processes.
+    shape Thread<T> = {
+        handle: ThreadHandle<T>;
+    };
+
+    /// Spawn a new thread to execute the given function `f`.  The
+    /// returned `Thread<T>` can later be joined to obtain the
+    /// result.  The optional `seed` argument controls the scheduler
+    /// seed for deterministic interleavings.  The implementation is
+    /// deferred.
+    process spawn<T>(f: () -> T, seed?: Int) -> Thread<T> = {
+        // TODO: create a new thread and return a handle
+    };
+
+    /// Wait for the thread to complete and return its result.
+    /// Calling `join` more than once on the same thread is a
+    /// constraint violation.
+    process join<T>(thread: Thread<T>) -> T = {
+        // TODO: wait for completion and return the result
+    };
+}

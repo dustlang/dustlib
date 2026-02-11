@@ -1,0 +1,16 @@
+[package]
+name = "dustlib"
+version = "0.2.0"
+authors = ["Dust Contributors <contributors@dust.llc>"]
+edition = "2026"
+description = "Core library for the Dust Programming Language (DPL)"
+license = "DOSL"
+
+[workspace]
+members = [
+    "sector/dustlib"
+]
+
+# dustlib uses a workspace layout to allow additional crates to be
+# added in future.  The `crate/dustlib` member contains the actual
+# library code written in Dust.
