@@ -1,0 +1,35 @@
+# State.toml for the dustlib_core Sector
+
+[package]
+name = "dustlib_core"
+version = "0.2.0"
+edition = "2026" # Assuming a DPL edition system
+description = "Core types and traits for the Dust Programming Language"
+license = "DOSL-1.0"
+repository = "https://github.com/dustlang/dustlib"
+
+# Specifies the root source file for this sector
+[[bin]] # Or [[lib]] depending on the primary artifact intended
+name = "dustlib_core"
+path = "src/lib.ds"
+
+# Dependencies for this specific sector
+[dependencies]
+# No dependencies listed here as dustlib_core is the foundational library.
+# Other sectors (e.g., dustlib_collections) might depend on this one.
+# External dependencies would go here if any were needed (unlikely for core primitives).
+
+[dev-dependencies]
+# Dependencies only used for testing this sector, if applicable
+# e.g., dusttest = { version = "0.2.0", registry = "..." }
+
+# Build-specific settings for this sector
+[build]
+# build-script = "..." # If a build script is needed (likely a DPL equivalent or Rust-based initially)
+# required-features = [...] # If certain features are required to build
+
+# Profile overrides for this sector if needed
+# [profile.dev]
+# ...
+# [profile.release]
+# ...

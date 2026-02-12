@@ -1,0 +1,13 @@
+// ops/mod.ds: Module declaration and re-exports for operator traits.
+// This file organizes the various operator-overloading traits within the dustlib_core sector.
+
+pub use self::arithmetic::*;
+pub use self::comparison::*;
+
+mod arithmetic;
+mod comparison;
+
+// Potentially other operator categories like bitwise, logical, indexing could be added here.
+// mod bitwise;
+// mod logical;
+// mod indexing;

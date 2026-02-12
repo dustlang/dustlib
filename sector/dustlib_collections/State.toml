@@ -1,0 +1,34 @@
+# State.toml for the dustlib_collections Sector
+
+[package]
+name = "dustlib_collections"
+version = "0.2.0"
+edition = "2026" # Assuming a DPL edition system
+description = "Collection types for the Dust Programming Language (e.g., Vec, HashMap)"
+license = "DOSL-1.0"
+repository = "https://github.com/dustlang/dustlib"
+
+# Specifies the root source file for this sector
+[[lib]] # Defines this as a library sector
+name = "dustlib_collections"
+path = "src/lib.ds"
+
+# Dependencies for this specific sector
+[dependencies]
+dustlib_core = { path = "../dustlib_core" } # Depends on the core library
+# Other dependencies might be added later if needed
+
+[dev-dependencies]
+# Dependencies only used for testing this sector
+# e.g., dusttest = { version = "0.2.0", registry = "..." }
+
+# Build-specific settings for this sector if needed
+[build]
+# build-script = "..." 
+# required-features = [...] 
+
+# Profile overrides for this sector if needed
+# [profile.dev]
+# ...
+# [profile.release]
+# ...

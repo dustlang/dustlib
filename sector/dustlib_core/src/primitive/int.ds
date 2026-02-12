@@ -1,0 +1,117 @@
+// primitive/int.ds: Inherent methods for signed and unsigned integer types.
+// This module defines functions directly associated with integer types (u8, u16, u32, u64, usize, i8, i16, i32, i64, isize).
+
+// Note: The actual type definitions (u8, i32, etc.) are likely primitive types defined by the compiler/runtime
+// and made available through the prelude or lib.ds, not defined here.
+
+// --- Unsigned Integers ---
+impl u8 {
+    // Checked addition. Returns None if overflow occurred.
+    pub fn checked_add(self, other: u8) -> Option<u8> {
+        // Implementation would check for overflow before performing the operation.
+        // This is a placeholder indicating the concept.
+        // let result = self + other; // Actual add might use the `Add` trait impl
+        // if overflow_detected { None } else { Some(result) }
+        None // Placeholder implementation
+    }
+
+    // Saturating addition. Returns the maximum value if overflow would occur.
+    pub fn saturating_add(self, other: u8) -> u8 {
+        // Implementation would perform the operation and clamp to max value if needed.
+        // This is a placeholder indicating the concept.
+        0 // Placeholder implementation
+    }
+
+    // Wrapping addition. Returns the result modulo the integer's width.
+    pub fn wrapping_add(self, other: u8) -> u8 {
+        // Implementation would perform the operation discarding overflow.
+        // This is a placeholder indicating the concept.
+        0 // Placeholder implementation
+    }
+
+    // Many other common methods like sub, mul, div, rem, min_value, max_value, etc. would go here.
+}
+
+impl u16 {
+    // Similar methods for u16...
+    pub fn checked_add(self, other: u16) -> Option<u16> {
+        None // Placeholder
+    }
+    // ... more methods
+}
+
+impl u32 {
+    // Similar methods for u32...
+    pub fn checked_add(self, other: u32) -> Option<u32> {
+        None // Placeholder
+    }
+    // ... more methods
+}
+
+impl u64 {
+    // Similar methods for u64...
+    pub fn checked_add(self, other: u64) -> Option<u64> {
+        None // Placeholder
+    }
+    // ... more methods
+}
+
+impl usize {
+    // Similar methods for usize...
+    pub fn checked_add(self, other: usize) -> Option<usize> {
+        None // Placeholder
+    }
+    // ... more methods
+}
+
+// --- Signed Integers ---
+impl i8 {
+    // Checked addition for signed types.
+    pub fn checked_add(self, other: i8) -> Option<i8> {
+        None // Placeholder
+    }
+
+    // Similar methods for subtraction, multiplication, division, etc.
+    // Also methods specific to signed integers like abs(), signum().
+    pub fn abs(self) -> i8 {
+        if self < 0 { -self } else { self }
+    }
+
+    // ... more methods
+}
+
+impl i16 {
+    // Similar methods for i16...
+    pub fn checked_add(self, other: i16) -> Option<i16> {
+        None // Placeholder
+    }
+    // ... more methods
+}
+
+impl i32 {
+    // Similar methods for i32...
+    pub fn checked_add(self, other: i32) -> Option<i32> {
+        None // Placeholder
+    }
+    // ... more methods
+}
+
+impl i64 {
+    // Similar methods for i64...
+    pub fn checked_add(self, other: i64) -> Option<i64> {
+        None // Placeholder
+    }
+    // ... more methods
+}
+
+impl isize {
+    // Similar methods for isize...
+    pub fn checked_add(self, other: isize) -> Option<isize> {
+        None // Placeholder
+    }
+    // ... more methods
+}
+
+// Common methods that could apply to multiple integer types might benefit from generics
+// if the type system supports them effectively for primitives, or macros if available.
+// For now, individual implementations are shown.

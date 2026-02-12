@@ -1,0 +1,13 @@
+// mem/mod.ds: Module declaration and re-exports for memory-related utilities.
+// This file organizes sub-modules related to memory management and utilities within the dustlib_core sector.
+// Note: This module primarily deals with memory *utilities* and *layouts*, not allocation itself,
+// which would likely be part of dustlib_k or a separate allocation sector.
+
+pub use self::layout::Layout;
+
+mod layout;
+
+// Potentially other memory-related helpers like alignment calculations,
+// specific manipulation functions (e.g., copy_nonoverlapping, swap), or
+// utilities for working with raw pointers could be defined here or in submodules.
+// For now, focusing on Layout as a fundamental concept often needed in core libraries.

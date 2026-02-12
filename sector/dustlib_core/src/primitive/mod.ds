@@ -1,0 +1,20 @@
+// primitive/mod.ds: Module declaration and re-exports for primitive type definitions and their inherent methods.
+// This file organizes sub-modules related to core primitive types within the dustlib_core sector.
+
+// Re-export fundamental primitive types if defined here, or just organize their method implementations.
+// Types like usize, isize, u8, u16, u32, u64, i8, i16, i32, i64, bool, char, str, unit are likely
+// defined directly in lib.ds or implicitly by the compiler/runtime.
+// This module focuses on providing inherent methods (functions associated directly with the type) for them.
+
+pub mod int; // Methods for signed and unsigned integer types (i8, i16, i32, i64, u8, u16, u32, u64, usize, isize)
+pub mod bool; // Methods for the boolean type
+pub mod char; // Methods for the character type
+// pub mod str; // Potentially methods for the str type, though this might be in a dedicated str module at the top level
+
+// Example of how a type might be defined here if not in lib.ds (though unlikely for core primitives)
+// type MyPrimitive = ...;
+
+// Example of how methods might be attached using an impl block (details in submodules like int.ds)
+// impl u32 {
+//     pub fn checked_add(self, other: u32) -> Option<u32> { ... }
+// }

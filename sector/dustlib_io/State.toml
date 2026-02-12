@@ -1,0 +1,35 @@
+# State.toml for the dustlib_io Sector
+
+[package]
+name = "dustlib_io"
+version = "0.2.0"
+edition = "2026" # Assuming a DPL edition system
+description = "Input/Output types and functions for the Dust Programming Language"
+license = "DOSL-1.0"
+repository = "https://github.com/dustlang/dustlib"
+
+# Specifies the root source file for this sector
+[[lib]] # Defines this as a library sector
+name = "dustlib_io"
+path = "src/lib.ds"
+
+# Dependencies for this specific sector
+[dependencies]
+dustlib_core = { path = "../dustlib_core" } # Depends on the core library
+# dustlib_k = { path = "../dustlib_k" } # Likely depends on the K-regime library for actual syscalls/IO primitives
+# Other dependencies might be added later if needed
+
+[dev-dependencies]
+# Dependencies only used for testing this sector
+# e.g., dusttest = { version = "0.2.0", registry = "..." }
+
+# Build-specific settings for this sector if needed
+[build]
+# build-script = "..." 
+# required-features = [...] 
+
+# Profile overrides for this sector if needed
+# [profile.dev]
+# ...
+# [profile.release]
+# ...

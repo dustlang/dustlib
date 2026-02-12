@@ -1,0 +1,14 @@
+// fmt/display.ds: Definition of the Display trait and related formatting helpers.
+
+use sector::fmt::{Formatter, FormatError}; // Adjust path if necessary based on actual module structure
+
+// The `Display` trait controls the format of a type when printed using `{}`.
+// This is intended for user-facing output, distinct from the `Debug` trait
+// which is intended for programmer-facing diagnostics.
+pub trait Display {
+    fn fmt(self, f: &mut Formatter) -> Result<(), FormatError>;
+}
+
+// Note: More complex formatting helpers (like builders for Display) are less common
+// than for Debug, as Display usually implies a simpler, more direct representation.
+// The core functionality revolves around the `fmt` method.

@@ -1,0 +1,34 @@
+// dustlib_io: The input/output library for the Dust Programming Language.
+// Provides types and functions for performing input and output operations,
+// primarily intended for the K-regime and interacting with classical systems.
+
+module dustlib_io;
+
+// Re-export the primary IO types and traits at the root of the sector for easy access.
+pub use self::io::{Read, Write, Result};
+// Add other primary items like the Error type, BufReader, BufWriter, etc., when implemented.
+// pub use self::error::Error;
+// pub use self::buffered::{BufReader, BufWriter};
+
+// This library is expected to depend heavily on `dustlib_k` for the actual
+// low-level system calls and hardware interaction primitives that perform
+// the read/write operations. `dustlib_core` provides fundamental types.
+use sector::dustlib_core; // Import core types and traits if needed
+// use sector::dustlib_k; // Import K-regime specific IO/syscall primitives (placeholder names)
+// Example hypothetical imports from dustlib_k:
+// use sector::dustlib_k::{sys_read, sys_write, FileHandle, IOErrorDetails};
+
+// Module definitions for core IO traits, types, and implementations.
+mod io; // Core traits like Read, Write, and the Result alias
+// mod error; // The Error type and related error handling
+// mod buffered; // Buffered reader/writer implementations
+// mod fs; // File system related operations (File, OpenOptions, etc.)
+// mod stdio; // Standard input/output handles (stdin, stdout, stderr)
+
+// Optional: Prelude module for IO-specific items that might be commonly used.
+// This would typically be re-exported by the main prelude in dustlib_core if appropriate.
+// pub mod prelude {
+//     pub use super::Read;
+//     pub use super::Write;
+//     // ... other common IO items
+// }

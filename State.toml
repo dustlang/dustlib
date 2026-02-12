@@ -1,0 +1,41 @@
+# State.toml for dustlib (Top-Level Workspace)
+
+[workspace]
+members = [
+    "sector/dustlib_core",
+    # Future sectors like "sector/dustlib_collections", "sector/dustlib_io" would be added here
+]
+
+[workspace.package]
+version = "0.2.0"  # Target version for this release cycle
+edition = "2026"   # Assuming a DPL edition system
+
+# Metadata
+authors = ["Dust Team"]
+description = "Core standard library for the Dust Programming Language"
+license = "DOSL-1.0"
+repository = "https://github.com/dustlang/dustlib"
+
+# Configuration for the workspace, if applicable
+[workspace.dependencies]
+# Dependencies shared across sectors within this workspace can be defined here.
+# For now, dustlib_core is foundational and likely has no external dependencies within the workspace.
+
+[profile.dev]
+# Settings for development builds (e.g., using `dust build`)
+opt-level = 0
+debug = true
+# Add other relevant settings for the DPL compiler if they exist
+
+[profile.release]
+# Settings for release builds (e.g., using `dust build --release`)
+opt-level = 3
+debug = false
+# Add other relevant settings for the DPL compiler if they exist
+
+# Optional: Specific configuration for tools interacting with this workspace
+# [workspace.metadata.dustdoc]
+# ...
+
+# [workspace.metadata.dusttest]
+# ...
