@@ -11,11 +11,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install Dust compiler
+
+      - name: Clone dust compiler
         run: |
-          # Build dust compiler from source or download pre-built
-          cargo install --path ../dust --locked || true
+          # Clone dust compiler to sibling directory
+          git clone --depth 1 https://github.com/dustlang/dust.git ../dust
+
+      - name: Install Rust (stable)
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache cargo build
+        uses: Swatinem/rust-cache@v2
+        with:
+          working-directory: ../dust
+
+      - name: Build Dust compiler
+        run: |
+          cd ../dust
+          cargo build --workspace
+
       - name: Build dustlib
-        run: dust build
+        run: |
+          export PATH="$PWD/../dust/target/debug:$PATH"
+          dust build
+
       - name: Test dustlib
-        run: dust test
+        run: |
+          export PATH="$PWD/../dust/target/debug:$PATH"
+          dust test
