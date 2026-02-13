@@ -10,12 +10,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Install Rust
-        uses: actions/setup-rust@v1
-        with:
-          toolchain: stable
-      - name: Build
-        run: cargo build --workspace --verbose
-      - name: Test
-        run: cargo test --workspace --verbose
+      - uses: actions/checkout@v4
+      - name: Install Dust compiler
+        run: |
+          # Build dust compiler from source or download pre-built
+          cargo install --path ../dust --locked || true
+      - name: Build dustlib
+        run: dust build
+      - name: Test dustlib
+        run: dust test
