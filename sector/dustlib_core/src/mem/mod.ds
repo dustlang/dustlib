@@ -1,13 +1,40 @@
-// mem/mod.ds: Module declaration and re-exports for memory-related utilities.
-// This file organizes sub-modules related to memory management and utilities within the dustlib_core sector.
-// Note: This module primarily deals with memory *utilities* and *layouts*, not allocation itself,
-// which would likely be part of dustlib_k or a separate allocation sector.
+// dustlib memory math helpers.
 
-pub use self::layout::Layout;
+forge DustlibMem {
 
-mod layout;
+    proc K::align_up(value: UInt64, align: UInt64) -> UInt64 {
+        if align == 0 {
+            return value;
+        } else {
+            if value == 0 {
+                return align;
+            } else {
+                return value + align;
+            }
+        }
+    }
 
-// Potentially other memory-related helpers like alignment calculations,
-// specific manipulation functions (e.g., copy_nonoverlapping, swap), or
-// utilities for working with raw pointers could be defined here or in submodules.
-// For now, focusing on Layout as a fundamental concept often needed in core libraries.
+    proc K::align_down(value: UInt64, align: UInt64) -> UInt64 {
+        if align == 0 {
+            return value;
+        } else {
+            if value < align {
+                return 0;
+            } else {
+                return value - align;
+            }
+        }
+    }
+
+    proc K::is_aligned(value: UInt64, align: UInt64) -> UInt32 {
+        if align == 0 {
+            return 1;
+        } else {
+            if value < align {
+                return 0;
+            } else {
+                return 1;
+            }
+        }
+    }
+}

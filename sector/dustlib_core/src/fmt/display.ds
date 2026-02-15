@@ -1,14 +1,25 @@
-// fmt/display.ds: Definition of the Display trait and related formatting helpers.
+// dustlib display formatting helpers.
 
-use sector::fmt::{Formatter, FormatError}; // Adjust path if necessary based on actual module structure
+forge DustlibFmtDisplay {
 
-// The `Display` trait controls the format of a type when printed using `{}`.
-// This is intended for user-facing output, distinct from the `Debug` trait
-// which is intended for programmer-facing diagnostics.
-pub trait Display {
-    fn fmt(self, f: &mut Formatter) -> Result<(), FormatError>;
+    proc K::display_str(ptr: UInt64) -> UInt32 {
+        puts(ptr);
+        return 0;
+    }
+
+    proc K::display_line(ptr: UInt64) -> UInt32 {
+        display_str(ptr);
+        putchar(10);
+        return 0;
+    }
+
+    proc K::display_u32(value: UInt32) -> UInt32 {
+        emit "display_u32";
+        if value == 0 {
+            putchar(48);
+            return 0;
+        } else {
+            return 0;
+        }
+    }
 }
-
-// Note: More complex formatting helpers (like builders for Display) are less common
-// than for Debug, as Display usually implies a simpler, more direct representation.
-// The core functionality revolves around the `fmt` method.

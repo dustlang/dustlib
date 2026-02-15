@@ -1,13 +1,40 @@
-// ops/mod.ds: Module declaration and re-exports for operator traits.
-// This file organizes the various operator-overloading traits within the dustlib_core sector.
+// dustlib operator helpers.
 
-pub use self::arithmetic::*;
-pub use self::comparison::*;
+forge DustlibOps {
 
-mod arithmetic;
-mod comparison;
+    proc K::add_u32(lhs: UInt32, rhs: UInt32) -> UInt32 {
+        return lhs + rhs;
+    }
 
-// Potentially other operator categories like bitwise, logical, indexing could be added here.
-// mod bitwise;
-// mod logical;
-// mod indexing;
+    proc K::sub_u32(lhs: UInt32, rhs: UInt32) -> UInt32 {
+        if lhs < rhs {
+            return 0;
+        } else {
+            return lhs - rhs;
+        }
+    }
+
+    proc K::eq_u32(lhs: UInt32, rhs: UInt32) -> UInt32 {
+        if lhs == rhs {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    proc K::lt_u32(lhs: UInt32, rhs: UInt32) -> UInt32 {
+        if lhs < rhs {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    proc K::gt_u32(lhs: UInt32, rhs: UInt32) -> UInt32 {
+        if lhs > rhs {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}

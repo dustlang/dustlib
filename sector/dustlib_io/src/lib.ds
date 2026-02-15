@@ -1,34 +1,32 @@
-// dustlib_io: The input/output library for the Dust Programming Language.
-// Provides types and functions for performing input and output operations,
-// primarily intended for the K-regime and interacting with classical systems.
+// dustlib io helpers.
 
-module dustlib_io;
+forge DustlibIo {
 
-// Re-export the primary IO types and traits at the root of the sector for easy access.
-pub use self::io::{Read, Write, Result};
-// Add other primary items like the Error type, BufReader, BufWriter, etc., when implemented.
-// pub use self::error::Error;
-// pub use self::buffered::{BufReader, BufWriter};
+    const MODE_READ: UInt32 = 0;
+    const MODE_WRITE: UInt32 = 1;
+    const MODE_APPEND: UInt32 = 2;
 
-// This library is expected to depend heavily on `dustlib_k` for the actual
-// low-level system calls and hardware interaction primitives that perform
-// the read/write operations. `dustlib_core` provides fundamental types.
-use sector::dustlib_core; // Import core types and traits if needed
-// use sector::dustlib_k; // Import K-regime specific IO/syscall primitives (placeholder names)
-// Example hypothetical imports from dustlib_k:
-// use sector::dustlib_k::{sys_read, sys_write, FileHandle, IOErrorDetails};
+    proc K::open_read(path: UInt64) -> UInt64 {
+        return open(path, MODE_READ);
+    }
 
-// Module definitions for core IO traits, types, and implementations.
-mod io; // Core traits like Read, Write, and the Result alias
-// mod error; // The Error type and related error handling
-// mod buffered; // Buffered reader/writer implementations
-// mod fs; // File system related operations (File, OpenOptions, etc.)
-// mod stdio; // Standard input/output handles (stdin, stdout, stderr)
+    proc K::open_write(path: UInt64) -> UInt64 {
+        return open(path, MODE_WRITE);
+    }
 
-// Optional: Prelude module for IO-specific items that might be commonly used.
-// This would typically be re-exported by the main prelude in dustlib_core if appropriate.
-// pub mod prelude {
-//     pub use super::Read;
-//     pub use super::Write;
-//     // ... other common IO items
-// }
+    proc K::open_append(path: UInt64) -> UInt64 {
+        return open(path, MODE_APPEND);
+    }
+
+    proc K::read_all(fd: UInt64, buffer: UInt64, max_bytes: UInt32) -> UInt32 {
+        return read(fd, buffer, max_bytes);
+    }
+
+    proc K::write_all(fd: UInt64, buffer: UInt64, bytes: UInt32) -> UInt32 {
+        return write(fd, buffer, bytes);
+    }
+
+    proc K::close_fd(fd: UInt64) -> UInt32 {
+        return close(fd);
+    }
+}

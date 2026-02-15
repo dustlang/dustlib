@@ -1,35 +1,24 @@
-// prelude.ds: The prelude module for dustlib_core.
-// Items declared here are automatically brought into scope for every DPL program
-// that links against dustlib_core, reducing the need for explicit imports of common items.
+// dustlib prelude helpers.
 
-module prelude;
+forge DustlibPrelude {
 
-// Re-export core types and traits that are frequently used.
-pub use super::bool;
-pub use super::char;
-pub use super::str;
-pub use super::unit;
-pub use super::usize;
-pub use super::isize;
-pub use super::u8;
-pub use super::u16;
-pub use super::u32;
-pub use super::u64;
-pub use super::i8;
-pub use super::i16;
-pub use super::i32;
-pub use super::i64;
+    proc K::init() -> UInt32 {
+        emit "dustlib prelude initialized";
+        return 0;
+    }
 
-pub use super::Result;
-pub use super::Option;
+    proc K::print_ok(message: UInt64) -> UInt32 {
+        puts(message);
+        putchar(10);
+        return 0;
+    }
 
-pub use super::Copy;
-pub use super::Drop;
-pub use super::Display;
-pub use super::Debug;
-
-// Re-export fundamental macros if they are defined here or in a standard location.
-// e.g., pub use super::macros::{panic, assert, println}; // Assuming macros are defined in a submodule
-
-// Add other commonly used items as the library grows.
-// pub use super::collections::{Vec, HashMap}; // When collections are added and deemed fundamental enough
+    proc K::assert_true(value: UInt32) -> UInt32 {
+        if value == 0 {
+            emit "prelude assert failed";
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}

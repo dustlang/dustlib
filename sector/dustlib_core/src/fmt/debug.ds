@@ -1,90 +1,46 @@
-// fmt/debug.ds: Definition of the Debug trait and related formatting helpers.
+// dustlib debug formatting helpers.
 
-use sector::fmt::{Formatter, FormatError}; // Adjust path if necessary based on actual module structure
+forge DustlibFmtDebug {
 
-// The `Debug` trait enables a type to be formatted for debugging output using `{:?}`.
-// This is typically used for programmer-facing, diagnostic output and can show internal structure.
-// The output format is not specified and may change between versions.
-// It is expected to be implemented for most types to aid in debugging.
-pub trait Debug {
-    fn fmt(self, f: &mut Formatter) -> Result<(), FormatError>;
-}
+    const KIND_SCALAR: UInt32 = 1;
+    const KIND_PAIR: UInt32 = 2;
+    const KIND_LIST: UInt32 = 3;
 
-// Helper struct for building debug representations of structs.
-// Users can leverage this in their Debug implementations.
-pub struct DebugStruct<'a> {
-    formatter: &'a mut Formatter,
-    result: Result<(), FormatError>,
-    has_fields: bool,
-}
-
-impl<'a> DebugStruct<'a> {
-    // Finishes the struct building, emitting the ending brace.
-    pub fn finish(self) -> Result<(), FormatError> {
-        // Implementation would handle closing the struct representation in the formatter.
-        // e.g., if it opened with '{', it writes '}'
-        // This is a placeholder for the actual logic within the Formatter.
-        // The actual implementation depends heavily on the internals of `Formatter`.
-        // For now, assume the formatter handles state.
-        // self.formatter.write_str("}")?;
-        Ok(()) // Simplified, actual finish logic depends on Formatter impl
+    proc K::debug_open(kind: UInt32) -> UInt32 {
+        if kind == KIND_SCALAR {
+            putchar(60);
+            return 0;
+        } else {
+            if kind == KIND_PAIR {
+                putchar(40);
+                return 0;
+            } else {
+                putchar(91);
+                return 0;
+            }
+        }
     }
 
-    // Adds a new field to the generated struct output.
-    pub fn field(self, name: &str, value: &dyn Debug) -> Self {
-        // Implementation would add "name: value" to the formatter's output,
-        // handling commas and spacing appropriately.
-        // e.g., formatter.write_str(name)?; formatter.write_str(": ")?; value.fmt(formatter)?;
-        // This is a placeholder.
-        self
-    }
-}
-
-// Helper struct for building debug representations of tuples.
-pub struct DebugTuple<'a> {
-    formatter: &'a mut Formatter,
-    result: Result<(), FormatError>,
-    has_fields: bool,
-}
-
-impl<'a> DebugTuple<'a> {
-    // Finishes the tuple building, emitting the ending parenthesis.
-    pub fn finish(self) -> Result<(), FormatError> {
-        Ok(()) // Placeholder
+    proc K::debug_field(name: UInt64, value: UInt64) -> UInt32 {
+        puts(name);
+        putchar(58);
+        putchar(32);
+        puts(value);
+        return 0;
     }
 
-    // Adds a new field to the generated tuple output.
-    pub fn field(self, value: &dyn Debug) -> Self {
-        // Implementation would add "value" to the formatter's output,
-        // handling commas and spacing appropriately.
-        self
+    proc K::debug_close(kind: UInt32) -> UInt32 {
+        if kind == KIND_SCALAR {
+            putchar(62);
+            return 0;
+        } else {
+            if kind == KIND_PAIR {
+                putchar(41);
+                return 0;
+            } else {
+                putchar(93);
+                return 0;
+            }
+        }
     }
 }
-
-// Helper struct for building debug representations of lists/vectors.
-pub struct DebugList<'a> {
-    formatter: &'a mut Formatter,
-    result: Result<(), FormatError>,
-    has_items: bool,
-}
-
-impl<'a> DebugList<'a> {
-    // Finishes the list building, emitting the ending bracket.
-    pub fn finish(self) -> Result<(), FormatError> {
-        Ok(()) // Placeholder
-    }
-
-    // Adds a new entry to the generated list output.
-    pub fn entry(self, value: &dyn Debug) -> Self {
-        // Implementation would add "value" to the formatter's output,
-        // handling commas and spacing appropriately.
-        self
-    }
-}
-
-// Placeholder for the actual Formatter implementation details,
-// which would contain the logic for `write_str` and managing the output buffer/state.
-// This is likely defined elsewhere and `use`d, or its public interface is defined here.
-// For now, just referencing it as a type used by Debug::fmt.
-// pub struct Formatter { /* ... */ }
-// pub enum FormatError { /* ... */ } // Defined in the parent fmt module or lib.ds

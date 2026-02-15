@@ -1,108 +1,47 @@
-// result.ds: Definition and implementation of the Result<T, E> type.
+// dustlib result helpers.
 
-use sector::{Debug, FormatError, Formatter};
+forge DustlibResult {
 
-// `Result<T, E>` is a type used for returning and propagating errors.
-// It is an enum with two variants: `Ok(T)` for success and `Err(E)` for error.
-pub enum Result<T, E> {
-    Ok(T),
-    Err(E),
-}
+    const TAG_OK: UInt32 = 0;
+    const TAG_ERR: UInt32 = 1;
 
-impl<T, E> Result<T, E> {
-    // Returns true if the result is `Ok`.
-    pub fn is_ok(&self) -> bool {
-        match self {
-            Ok(_) => true,
-            Err(_) => false,
+    proc K::is_ok(tag: UInt32) -> UInt32 {
+        if tag == TAG_OK {
+            return 1;
+        } else {
+            return 0;
         }
     }
 
-    // Returns true if the result is `Err`.
-    pub fn is_err(&self) -> bool {
-        !self.is_ok()
-    }
-
-    // Unwraps the result, yielding the content of an `Ok`.
-    // Panics if the value is an `Err`.
-    pub fn unwrap(self) -> T
-    where
-        E: Debug, // Requires the error type to implement Debug for panic message
-    {
-        match self {
-            Ok(val) => val,
-            Err(e) => panic!("Called `result.unwrap()` on an `Err` value: {:?}", e),
+    proc K::is_err(tag: UInt32) -> UInt32 {
+        if tag == TAG_ERR {
+            return 1;
+        } else {
+            return 0;
         }
     }
 
-    // Unwraps the result, yielding the content of an `Err`.
-    // Panics if the value is an `Ok`.
-    pub fn unwrap_err(self) -> E
-    where
-        T: Debug, // Requires the ok type to implement Debug for panic message
-    {
-        match self {
-            Ok(t) => panic!("Called `result.unwrap_err()` on an `Ok` value: {:?}", t),
+    proc K::unwrap_or_u32(tag: UInt32, value: UInt32, fallback: UInt32) -> UInt32 {
+        if is_ok(tag) == 1 {
+            return value;
+        } else {
+            return fallback;
         }
     }
 
-    // Maps a Result<T, E> to Result<U, E> by applying a function to a contained Ok value,
-    // leaving an Err value untouched.
-    pub fn map<U, F>(self, op: F) -> Result<U, E>
-    where
-        F: FnOnce(T) -> U,
-    {
-        match self {
-            Ok(t) => Ok(op(t)),
-            Err(e) => Err(e),
+    proc K::map_ok_increment(tag: UInt32, value: UInt32) -> UInt32 {
+        if is_ok(tag) == 1 {
+            return value + 1;
+        } else {
+            return value;
         }
     }
 
-    // Maps a Result<T, E> to Result<T, F> by applying a function to a contained Err value,
-    // leaving an Ok value untouched.
-    pub fn map_err<F, O>(self, op: O) -> Result<T, F>
-    where
-        O: FnOnce(E) -> F,
-    {
-        match self {
-            Ok(t) => Ok(t),
-            Err(e) => Err(op(e)),
-        }
-    }
-
-    // Returns the contained Ok value or a provided default.
-    pub fn unwrap_or(self, default: T) -> T {
-        match self {
-            Ok(val) => val,
-            Err(_) => default,
-        }
-    }
-}
-
-// Note: The `FormatError` type must be available for the `Display` impl below.
-// This assumes `FormatError` is either defined here, re-exported, or available in scope.
-// For now, assuming it's in scope via `use crate::...` or defined earlier in this file if needed independently.
-// Otherwise, it might be better defined in a `fmt` module and imported here.
-
-// Optionally, implement Display for Result if useful, showing the underlying T or E.
-// This requires T and E to implement Display.
-impl<T, E> Display for Result<T, E>
-where
-    T: Display,
-    E: Display,
-{
-    fn fmt(self, f: &mut Formatter) -> Result<(), FormatError> {
-        match self {
-            Ok(v) => {
-                f.write_str("Ok(")?;
-                v.fmt(f)?;
-                f.write_str(")")
-            }
-            Err(e) => {
-                f.write_str("Err(")?;
-                e.fmt(f)?;
-                f.write_str(")")
-            }
+    proc K::map_err_to_code(tag: UInt32, err_code: UInt32, mapped_code: UInt32) -> UInt32 {
+        if is_err(tag) == 1 {
+            return mapped_code;
+        } else {
+            return err_code;
         }
     }
 }

@@ -1,15 +1,15 @@
-// fmt/mod.ds: Module declaration and re-exports for the formatting utilities.
-// This file organizes the sub-modules related to formatting within the dustlib_core sector.
+// dustlib formatting module aggregator.
 
-pub use self::debug::Debug;
-pub use self::display::Display;
-// Re-export other formatting-related items as they are added to submodules.
+forge DustlibFmt {
 
-mod debug;
-mod display;
+    proc K::format_debug_pair(name: UInt64, value: UInt64) -> UInt32 {
+        debug_open(2);
+        debug_field(name, value);
+        debug_close(2);
+        return 0;
+    }
 
-// Potentially other formatting helper types or functions could be defined here directly
-// if they don't fit neatly into Debug or Display modules.
-// For example, a generic formatting argument processor, alignment helpers, etc.
-// type Arguments<'a>; // Placeholder for future implementation
-// fn format(args: Arguments) -> Result<String, FormatError>; // Placeholder
+    proc K::format_display_line(text: UInt64) -> UInt32 {
+        return display_line(text);
+    }
+}

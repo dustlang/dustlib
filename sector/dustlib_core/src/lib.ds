@@ -1,222 +1,57 @@
-// dustlib_core: The foundational sector of the Dust Standard Library.
-// Provides core types, traits, and utilities fundamental to all DPL programs.
+// dustlib_core foundational operations.
 
-module dustlib_core;
+forge DustlibCore {
 
-// --- Core Primitives ---
+    const ABI_REVISION: UInt32 = 3;
+    const MAX_DEFAULT_CAPACITY: UInt32 = 1024;
 
-// usize: Unsigned integer type, commonly used for array/slice lengths and loop counters.
-// The exact bit width is platform-dependent but guaranteed to hold any memory address.
-type usize;
+    const ERR_OK: UInt32 = 0;
+    const ERR_INVALID: UInt32 = 1;
+    const ERR_DOMAIN_NOT_AVAILABLE: UInt32 = 100;
 
-// isize: Signed integer type, commonly used for array/slicing indices.
-// The exact bit width is platform-dependent but matches usize.
-type isize;
+    proc K::init() -> UInt32 {
+        emit "dustlib_core initialized";
+        return ABI_REVISION;
+    }
 
-// u8: 8-bit unsigned integer
-type u8;
-
-// u16: 16-bit unsigned integer
-type u16;
-
-// u32: 32-bit unsigned integer
-type u32;
-
-// u64: 64-bit unsigned integer
-type u64;
-
-// i8: 8-bit signed integer
-type i8;
-
-// i16: 16-bit signed integer
-type i16;
-
-// i32: 32-bit signed integer
-type i32;
-
-// i64: 64-bit signed integer
-type i64;
-
-// bool: Boolean value representing true or false.
-type bool {
-    true,
-    false
-}
-
-// char: A Unicode scalar value (U+0000 to U+D7FF and U+E000 to U+10FFFF).
-type char;
-
-// str: An immutable sequence of Unicode characters (UTF-8 encoded).
-// Represented as a slice of bytes (`[u8]`) with guarantee of valid UTF-8.
-type str;
-
-// Unit type: Represents an empty tuple, often used as a return type when no value is needed.
-type unit = ();
-
-
-// --- Core Formatting Types ---
-
-// `Formatter` is an internal type used by the `format_args!` macro and formatting traits
-// to collect and write the output string.
-// Its internal structure is opaque to user code.
-type Formatter;
-
-// `FormatError` is the error type returned by formatting operations.
-// It usually indicates an issue with the underlying writer (e.g., buffer full).
-enum FormatError {
-    BufferFull,
-    InvalidFormat,
-    // Add other potential formatting errors as needed
-}
-
-
-// --- Fundamental Traits ---
-
-// The `Copy` trait indicates that a type can be duplicated simply by copying bits.
-// Types like integers, booleans, and characters implement Copy.
-// Types like strings or vectors do not, as they own heap data.
-trait Copy { }
-
-// The `Drop` trait provides a way to run cleanup code when a value goes out of scope.
-// This is crucial for resource management (memory, file handles, locks).
-trait Drop {
-    fn drop(self);
-}
-
-// The `Add` trait allows types to define the behavior of the `+` operator.
-trait Add<Rhs> {
-    type Output;
-    fn add(self, rhs: Rhs) -> Self::Output;
-}
-
-// The `Display` trait controls the format of a type when printed using `{}`.
-trait Display {
-    fn fmt(self, f: &mut Formatter) -> Result<(), FormatError>;
-}
-
-// The `Debug` trait enables a type to be formatted for debugging output using `{:?}`.
-// This is typically used for programmer-facing, diagnostic output and can show internal structure.
-// The output format is not specified and may change between versions.
-// It is expected to be implemented for most types to aid in debugging.
-trait Debug {
-    fn fmt(self, f: &mut Formatter) -> Result<(), FormatError>;
-}
-
-
-// --- Basic Result Type ---
-
-// `Result<T, E>` is a type used for returning and propagating errors.
-// It is an enum with two variants: `Ok(T)` for success and `Err(E)` for error.
-enum Result<T, E> {
-    Ok(T),
-    Err(E),
-}
-
-impl<T, E> Result<T, E> {
-    // Returns true if the result is `Ok`.
-    fn is_ok(&self) -> bool {
-        match self {
-            Ok(_) => true,
-            Err(_) => false,
+    proc K::min_u32(lhs: UInt32, rhs: UInt32) -> UInt32 {
+        if lhs < rhs {
+            return lhs;
+        } else {
+            return rhs;
         }
     }
 
-    // Returns true if the result is `Err`.
-    fn is_err(&self) -> bool {
-        !self.is_ok()
-    }
-
-    // Unwraps the result, yielding the content of an `Ok`.
-    // Panics if the value is an `Err`.
-    fn unwrap(self) -> T
-    where
-        E: Debug, // Requires the error type to implement Debug for panic message
-    {
-        match self {
-            Ok(val) => val,
-            Err(e) => panic!("Called `result.unwrap()` on an `Err` value: {:?}", e),
+    proc K::max_u32(lhs: UInt32, rhs: UInt32) -> UInt32 {
+        if lhs > rhs {
+            return lhs;
+        } else {
+            return rhs;
         }
     }
 
-    // Unwraps the result, yielding the content of an `Err`.
-    // Panics if the value is an `Ok`.
-    fn unwrap_err(self) -> E
-    where
-        T: Debug, // Requires the ok type to implement Debug for panic message
-    {
-        match self {
-            Ok(t) => panic!("Called `result.unwrap_err()` on an `Ok` value: {:?}", t),
+    proc K::clamp_u32(value: UInt32, low: UInt32, high: UInt32) -> UInt32 {
+        if value < low {
+            return low;
+        } else {
+            if value > high {
+                return high;
+            } else {
+                return value;
+            }
         }
     }
+
+    proc K::bool_to_u32(value: UInt32) -> UInt32 {
+        if value == 0 {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+    proc K::capacity_default() -> UInt32 {
+        return MAX_DEFAULT_CAPACITY;
+    }
+
 }
-
-
-// --- Basic Option Type ---
-
-// `Option<T>` is a type that represents a value that may or may not be present.
-// It is an enum with two variants: `Some(T)` if the value is present, and `None` if it is absent.
-enum Option<T> {
-    Some(T),
-    None,
-}
-
-impl<T> Option<T> {
-    // Returns true if the option is a `Some` value.
-    fn is_some(&self) -> bool {
-        match self {
-            Some(_) => true,
-            None => false,
-        }
-    }
-
-    // Returns true if the option is a `None` value.
-    fn is_none(&self) -> bool {
-        !self.is_some()
-    }
-
-    // Unwraps the option, yielding the content of a `Some`.
-    // Panics if the value is a `None`.
-    fn unwrap(self) -> T
-    where
-        T: Debug, // Requires the inner type to implement Debug for panic message
-    {
-        match self {
-            Some(val) => val,
-            None => panic!("Called `option.unwrap()` on a `None` value"),
-        }
-    }
-
-     // Returns the contained value or a default.
-    fn unwrap_or(self, default: T) -> T {
-        match self {
-            Some(val) => val,
-            None => default,
-        }
-    }
-}
-
-
-// --- Basic Slice Type ---
-
-// `Slice<T>` is a dynamically-sized view into a contiguous sequence of `T`.
-// It consists of a pointer to the data and a length.
-// Denoted as `[T]` in type expressions (e.g., `&[i32]`).
-type Slice<T>;
-
-// --- Basic Array Type ---
-
-// `[T; N]` is a fixed-size array of `N` elements of type `T`.
-// The size `N` must be a compile-time constant.
-type Array<T, const N: usize> = [T; N];
-
-
-// --- Entry Point or Initialization Logic for the Sector (if needed) ---
-// For a core library like this, there might not be a single entry point,
-// but rather a collection of types, traits, and functions available for import.
-// This section could define initialization routines if stateful modules are part of the core,
-// or simply serve as a place to define global constants or configurations for the sector.
-
-// Example potential constant:
-const MAX_DEFAULT_CAPACITY: usize = 1024; // Or some other sensible default
-
-// End of dustlib_core sector definition.

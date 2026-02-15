@@ -1,0 +1,10 @@
+// dustlib bridge for xdv-os integration checks.
+
+forge DustlibBridge {
+    const ABI_REVISION: UInt32 = 2;
+
+    proc K::ready() -> UInt32 {
+        emit "dustlib bridge ready";
+        return ABI_REVISION;
+    }
+}

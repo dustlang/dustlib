@@ -1,41 +1,51 @@
-// dustlib_collections: The collections library for the Dust Programming Language.
-// Provides common data structures like dynamic arrays (Vec) and hash maps (HashMap).
+// dustlib collection helpers.
 
-module dustlib_collections;
+forge DustlibCollections {
 
-// Re-export the primary collection types at the root of the sector for easy access.
-pub use self::vec::Vec;
-pub use self::hash_map::HashMap;
-// Add other collections like HashSet, LinkedList, BTreeMap/Set, etc., when implemented.
-// pub use self::hash_set::HashSet;
-// pub use self::linked_list::LinkedList;
+    const DEFAULT_VEC_CAPACITY: UInt32 = 16;
+    const MAX_VEC_CAPACITY: UInt32 = 1048576;
 
-// It's likely that collections will need to interact with allocation.
-// Since this is the collections *library*, it might depend on an allocation abstraction
-// provided by the K-regime library (`dustlib_k`) or potentially by `dustlib_core` if
-// a general, regime-agnostic allocation trait is defined there.
-// For now, assume an Allocator trait or similar might be needed and could be imported.
-// use sector::alloc::Allocator; // Example - adjust based on actual alloc design in dustlib_k or core.
+    proc K::vec_new() -> UInt32 {
+        return DEFAULT_VEC_CAPACITY;
+    }
 
-// Optional: Define common traits specific to collections here, or in a dedicated module.
-// For example, a trait for types that can be converted into iterators.
-// pub trait IntoIterator {
-//     type Item;
-//     type IntoIter: Iterator<Item = Self::Item>;
-//     fn into_iter(self) -> Self::IntoIter;
-// }
+    proc K::vec_grow(current_capacity: UInt32) -> UInt32 {
+        if current_capacity == 0 {
+            return DEFAULT_VEC_CAPACITY;
+        } else {
+            if current_capacity >= MAX_VEC_CAPACITY {
+                return MAX_VEC_CAPACITY;
+            } else {
+                return current_capacity * 2;
+            }
+        }
+    }
 
-// Module definitions for individual collection types.
-mod vec;
-mod hash_map;
-// mod hash_set;
-// mod linked_list;
-// ... other collection implementations
+    proc K::vec_push_count(current_len: UInt32, capacity: UInt32) -> UInt32 {
+        if current_len < capacity {
+            return current_len + 1;
+        } else {
+            return current_len;
+        }
+    }
 
-// Optional: Prelude module for collections-specific items that might be commonly used.
-// This would typically be re-exported by the main prelude in dustlib_core if appropriate.
-// pub mod prelude {
-//     pub use super::Vec;
-//     pub use super::HashMap;
-//     // ... other common collection items
-// }
+    proc K::vec_pop_count(current_len: UInt32) -> UInt32 {
+        if current_len == 0 {
+            return 0;
+        } else {
+            return current_len - 1;
+        }
+    }
+
+    proc K::map_bucket_index(hash: UInt32, bucket_count: UInt32) -> UInt32 {
+        if bucket_count == 0 {
+            return 0;
+        } else {
+            if hash < bucket_count {
+                return hash;
+            } else {
+                return bucket_count - 1;
+            }
+        }
+    }
+}

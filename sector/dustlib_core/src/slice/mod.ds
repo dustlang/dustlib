@@ -1,44 +1,44 @@
-// slice/mod.ds: Module declaration and re-exports for slice-related utilities and implementations.
-// This file organizes functionality associated with slices ([T]) within the dustlib_core sector.
+// dustlib slice utility operations.
 
-// The Slice<T> type itself is likely a fundamental language construct, implicitly defined by the compiler/runtime,
-// potentially aliased as [T]. This module provides inherent methods and potentially related traits/functions.
+forge DustlibSlice {
 
-// Example of how inherent methods might be attached to the slice type.
-// The actual type definition (Slice<T> or [T]) is likely not done here.
-// This module defines operations available on slice instances.
-
-impl<T> [T] { // Using [T] as the likely syntax for the slice type
-    // Returns the number of elements in the slice.
-    pub fn len(self) -> usize {
-        // Implementation would access the slice's internal length field.
-        0 // Placeholder
+    proc K::len(base: UInt64, count: UInt32) -> UInt32 {
+        if base == 0 {
+            return 0;
+        } else {
+            return count;
+        }
     }
 
-    // Returns true if the slice has a length of 0.
-    pub fn is_empty(self) -> bool {
-        self.len() == 0
+    proc K::is_empty(base: UInt64, count: UInt32) -> UInt32 {
+        if len(base, count) == 0 {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
-    // Returns a reference to an element or subslice, without doing bounds checking.
-    // Safety: The caller must ensure the index is within bounds.
-    pub unsafe fn get_unchecked(self, index: usize) -> &T {
-        // Implementation would perform unchecked indexing.
-        // This is a placeholder.
-        loop {} // Cannot return a reference without a real implementation or memory access
+    proc K::in_bounds(index: UInt32, count: UInt32) -> UInt32 {
+        if index < count {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
-    // Returns an iterator over the slice.
-    // pub fn iter(self) -> Iter<T> {
-    //     // Implementation would create an iterator struct initialized with the slice.
-    //     Iter::new(self)
-    // }
+    proc K::first_index(count: UInt32) -> UInt32 {
+        if count == 0 {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
 
-    // Many other common slice methods like split_at, first, last, binary_search, sort, etc. would go here.
+    proc K::last_index(count: UInt32) -> UInt32 {
+        if count == 0 {
+            return 0;
+        } else {
+            return count - 1;
+        }
+    }
 }
-
-// Potentially define traits specific to slicing or related helper types here.
-// pub trait SliceIndex<T> { ... }
-
-// Define submodules if complex logic is needed (e.g., for iterators).
-// mod iter;

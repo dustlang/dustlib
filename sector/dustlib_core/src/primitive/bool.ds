@@ -1,67 +1,60 @@
-// primitive/bool.ds: Inherent methods for the boolean type.
-// This module defines functions directly associated with the `bool` type.
+// dustlib bool helpers.
 
-// Note: The type definition for `bool` (with `true` and `false` values)
-// is likely primitive and defined elsewhere (e.g., lib.ds or implicitly by the compiler/runtime).
-// This module focuses on providing inherent methods for the `bool` type.
+forge DustlibPrimitiveBool {
 
-impl bool {
-    // Returns `true` if the value is `true`.
-    // This is somewhat redundant but provides symmetry with `is_false`.
-    pub fn is_true(self) -> bool {
-        self == true
+    proc K::is_true(value: UInt32) -> UInt32 {
+        if value == 0 {
+            return 0;
+        } else {
+            return 1;
+        }
     }
 
-    // Returns `true` if the value is `false`.
-    // This is somewhat redundant but provides symmetry with `is_true`.
-    pub fn is_false(self) -> bool {
-        self == false
+    proc K::is_false(value: UInt32) -> UInt32 {
+        if value == 0 {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
-    // Returns the negation of the boolean value.
-    // Equivalent to the `!` operator for bool.
-    pub fn not(self) -> bool {
-        !self // Assuming `!` is the standard unary NOT for bool in DPL
+    proc K::bool_not(value: UInt32) -> UInt32 {
+        if value == 0 {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
-    // Performs a logical AND operation with another boolean.
-    // Equivalent to the `&&` operator (short-circuiting) when used directly,
-    // but this method always evaluates the `other` argument.
-    pub fn and(self, other: bool) -> bool {
-        self & other // Assuming `&` is the standard bitwise/logical AND for bool in DPL
+    proc K::bool_and(lhs: UInt32, rhs: UInt32) -> UInt32 {
+        if lhs == 0 {
+            return 0;
+        } else {
+            if rhs == 0 {
+                return 0;
+            } else {
+                return 1;
+            }
+        }
     }
 
-    // Performs a logical OR operation with another boolean.
-    // Equivalent to the `||` operator (short-circuiting) when used directly,
-    // but this method always evaluates the `other` argument.
-    pub fn or(self, other: bool) -> bool {
-        self | other // Assuming `|` is the standard bitwise/logical OR for bool in DPL
+    proc K::bool_or(lhs: UInt32, rhs: UInt32) -> UInt32 {
+        if lhs == 0 {
+            if rhs == 0 {
+                return 0;
+            } else {
+                return 1;
+            }
+        } else {
+            return 1;
+        }
     }
 
-    // Performs a logical XOR (exclusive OR) operation with another boolean.
-    pub fn xor(self, other: bool) -> bool {
-        // XOR is true if operands are different
-        (self & (!other)) | ((!self) & other)
-        // Or, if DPL has a dedicated XOR operator for bool:
-        // self ^ other
-    }
-
-    // Converts the boolean value to an integer (0 for false, 1 for true).
-    // The return type `u8` is chosen as a common, small integer type for this purpose.
-    pub fn into_u8(self) -> u8 {
-        if self { 1 } else { 0 }
-    }
-
-    // Converts the boolean value to an integer (0 for false, 1 for true).
-    // The return type `u32` might be preferred in contexts where a larger or standard integer size is expected.
-    pub fn into_u32(self) -> u32 {
-        if self { 1 } else { 0 }
-    }
-
-    // Converts the boolean value to an `Option<()>`.
-    // Returns `Some(())` if `true`, or `None` if `false`.
-    // Useful for conditional computation based on a boolean.
-    pub fn then_some_unit(self) -> Option<()> {
-        if self { Some(()) } else { None }
+    proc K::bool_xor(lhs: UInt32, rhs: UInt32) -> UInt32 {
+        if lhs == rhs {
+            return 0;
+        } else {
+            return 1;
+        }
     }
 }
