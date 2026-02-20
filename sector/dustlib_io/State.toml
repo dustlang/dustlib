@@ -16,7 +16,7 @@ path = "src/lib.ds"
 # Dependencies for this specific sector
 [dependencies]
 dustlib_core = { path = "../dustlib_core" } # Depends on the core library
-# dustlib_k = { path = "../dustlib_k" } # Likely depends on the K-regime library for actual syscalls/IO primitives
+# dustlib_k = { path = "../dustlib-k" } # Likely depends on the K-regime library for actual syscalls/IO primitives
 # Other dependencies might be added later if needed
 
 [dev-dependencies]
