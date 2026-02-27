@@ -1,4 +1,12 @@
-// dustlib option helpers.
+// File: option.ds - This file is part of the DPL Toolchain
+// Copyright (c) 2026 Dust LLC, and Contributors
+// Description:
+//   dustlib option helpers.
+//   Provides Option type utilities:
+//     - TAG_NONE, TAG_SOME constants
+//     - is_some(): Check if option is Some
+//     - is_none(): Check if option is None
+//     - unwrap(): Get value or panic
 
 forge DustlibOption {
 

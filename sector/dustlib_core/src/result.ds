@@ -1,4 +1,12 @@
-// dustlib result helpers.
+// File: result.ds - This file is part of the DPL Toolchain
+// Copyright (c) 2026 Dust LLC, and Contributors
+// Description:
+//   dustlib result helpers.
+//   Provides Result type utilities:
+//     - TAG_OK, TAG_ERR constants
+//     - is_ok(): Check if result is Ok
+//     - is_err(): Check if result is Err
+//     - unwrap(): Get value or panic
 
 forge DustlibResult {
 

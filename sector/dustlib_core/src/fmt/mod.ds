@@ -1,4 +1,8 @@
-// dustlib formatting module aggregator.
+// File: mod.ds - This file is part of the DPL Toolchain
+// Copyright (c) 2026 Dust LLC, and Contributors
+// Description:
+//   dustlib formatting module aggregator.
+//   Provides format_debug_pair() for debug output formatting.
 
 forge DustlibFmt {
 

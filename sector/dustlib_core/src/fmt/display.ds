@@ -1,4 +1,11 @@
-// dustlib display formatting helpers.
+// File: display.ds - This file is part of the DPL Toolchain
+// Copyright (c) 2026 Dust LLC, and Contributors
+// Description:
+//   dustlib display formatting helpers.
+//   Provides:
+//     - display_str(): Display string
+//     - display_line(): Display string with newline
+//     - display_int(): Display integer
 
 forge DustlibFmtDisplay {
 

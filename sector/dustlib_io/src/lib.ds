@@ -1,4 +1,12 @@
-// dustlib io helpers.
+// File: lib.ds - This file is part of the DPL Toolchain
+// Copyright (c) 2026 Dust LLC, and Contributors
+// Description:
+//   dustlib io helpers.
+//   Provides file I/O operations:
+//     - MODE_READ, MODE_WRITE, MODE_APPEND constants
+//     - open_read(): Open file for reading
+//     - open_write(): Open file for writing
+//     - read(), write(), close() operations
 
 forge DustlibIo {
 

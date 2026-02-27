@@ -1,4 +1,11 @@
-// dustlib prelude helpers.
+// File: prelude.ds - This file is part of the DPL Toolchain
+// Copyright (c) 2026 Dust LLC, and Contributors
+// Description:
+//   dustlib prelude helpers.
+//   Provides:
+//     - init(): Prelude initialization
+//     - print_ok(): Print message with newline
+//     - Common prelude utilities for Dust programs
 
 forge DustlibPrelude {
 

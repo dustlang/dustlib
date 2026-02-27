@@ -1,4 +1,13 @@
-// dustlib_core foundational operations.
+// File: lib.ds - This file is part of the DPL Toolchain
+// Copyright (c) 2026 Dust LLC, and Contributors
+// Description:
+//   dustlib_core foundational operations.
+//   Provides:
+//     - ABI_REVISION: Current ABI version (3)
+//     - MAX_DEFAULT_CAPACITY: Default capacity (1024)
+//     - Error codes (ERR_OK, ERR_INVALID, ERR_DOMAIN_NOT_AVAILABLE)
+//     - Utility functions (min_u32, max_u32)
+//     - Initialization entry point
 
 forge DustlibCore {
 

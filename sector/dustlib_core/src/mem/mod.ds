@@ -1,4 +1,11 @@
-// dustlib memory math helpers.
+// File: mod.ds - This file is part of the DPL Toolchain
+// Copyright (c) 2026 Dust LLC, and Contributors
+// Description:
+//   dustlib memory math helpers.
+//   Provides:
+//     - align_up(): Align value up to alignment boundary
+//     - align_down(): Align value down to alignment boundary
+//     - is_aligned(): Check if value is aligned
 
 forge DustlibMem {
 

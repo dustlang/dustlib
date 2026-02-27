@@ -1,4 +1,9 @@
-// dustlib debug formatting helpers.
+// File: debug.ds - This file is part of the DPL Toolchain
+// Copyright (c) 2026 Dust LLC, and Contributors
+// Description:
+//   dustlib debug formatting helpers.
+//   Provides debug output constants (KIND_SCALAR, KIND_PAIR, KIND_LIST)
+//   and functions for debug formatting (debug_open, debug_field, debug_close).
 
 forge DustlibFmtDebug {
 

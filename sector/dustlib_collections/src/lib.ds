@@ -1,4 +1,11 @@
-// dustlib collection helpers.
+// File: lib.ds - This file is part of the DPL Toolchain
+// Copyright (c) 2026 Dust LLC, and Contributors
+// Description:
+//   dustlib collection helpers.
+//   Provides collection type utilities:
+//     - DEFAULT_VEC_CAPACITY, MAX_VEC_CAPACITY constants
+//     - vec_new(): Create new vector
+//     - vec_push(), vec_pop(), vec_get() operations
 
 forge DustlibCollections {
 

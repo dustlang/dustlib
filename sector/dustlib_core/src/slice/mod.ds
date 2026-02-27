@@ -1,4 +1,11 @@
-// dustlib slice utility operations.
+// File: mod.ds - This file is part of the DPL Toolchain
+// Copyright (c) 2026 Dust LLC, and Contributors
+// Description:
+//   dustlib slice utility operations.
+//   Provides:
+//     - len(): Get slice length
+//     - get_u8(): Get byte at index
+//     - get_u32(): Get u32 at index
 
 forge DustlibSlice {
 

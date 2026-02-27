@@ -1,4 +1,8 @@
-// dustlib primitive module aggregator.
+// File: mod.ds - This file is part of the DPL Toolchain
+// Copyright (c) 2026 Dust LLC, and Contributors
+// Description:
+//   dustlib primitive module aggregator.
+//   Provides self-test for primitive operations (checked_add_u32, bool_and).
 
 forge DustlibPrimitive {
 

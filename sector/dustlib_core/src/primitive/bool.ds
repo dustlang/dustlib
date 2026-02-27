@@ -1,4 +1,13 @@
-// dustlib bool helpers.
+// File: bool.ds - This file is part of the DPL Toolchain
+// Copyright (c) 2026 Dust LLC, and Contributors
+// Description:
+//   dustlib boolean helpers.
+//   Provides:
+//     - is_true(): Check if value is non-zero
+//     - bool_and(): Logical AND
+//     - bool_or(): Logical OR
+//     - bool_xor(): Logical XOR
+//     - bool_not(): Logical NOT
 
 forge DustlibPrimitiveBool {
 

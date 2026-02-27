@@ -1,4 +1,12 @@
-// dustlib integer helpers.
+// File: int.ds - This file is part of the DPL Toolchain
+// Copyright (c) 2026 Dust LLC, and Contributors
+// Description:
+//   dustlib integer helpers.
+//   Provides:
+//     - U32_MAX constant
+//     - checked_add_u32(): Addition with overflow check
+//     - checked_sub_u32(): Subtraction with overflow check
+//     - checked_mul_u32(): Multiplication with overflow check
 
 forge DustlibPrimitiveInt {
 

@@ -1,4 +1,11 @@
-// dustlib bridge for xdv-os integration checks.
+// File: xdv_os_bridge.ds - This file is part of the DPL Toolchain
+// Copyright (c) 2026 Dust LLC, and Contributors
+// Description:
+//   dustlib bridge for xdv-os integration.
+//   Provides:
+//     - ABI_REVISION: Bridge ABI version (2)
+//     - ready(): Initialize bridge and return ABI version
+//   Used for integrating dustlib with xdv-os kernel.
 
 forge DustlibBridge {
     const ABI_REVISION: UInt32 = 2;

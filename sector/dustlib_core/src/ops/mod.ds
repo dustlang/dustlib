@@ -1,4 +1,12 @@
-// dustlib operator helpers.
+// File: mod.ds - This file is part of the DPL Toolchain
+// Copyright (c) 2026 Dust LLC, and Contributors
+// Description:
+//   dustlib operator helpers.
+//   Provides:
+//     - add_u32(): Unsigned 32-bit addition
+//     - sub_u32(): Unsigned 32-bit subtraction
+//     - mul_u32(): Unsigned 32-bit multiplication
+//     - div_u32(): Unsigned 32-bit division
 
 forge DustlibOps {
 

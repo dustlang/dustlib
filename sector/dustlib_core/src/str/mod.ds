@@ -1,4 +1,11 @@
-// dustlib string utility operations.
+// File: mod.ds - This file is part of the DPL Toolchain
+// Copyright (c) 2026 Dust LLC, and Contributors
+// Description:
+//   dustlib string utility operations.
+//   Provides:
+//     - len(): Get string length
+//     - eq(): String equality comparison
+//     - concat(): String concatenation
 
 forge DustlibStr {
 
